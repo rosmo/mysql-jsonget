@@ -1,18 +1,20 @@
-JSON GET
+JSON GET for MySQL
 
 This simple UDF extension looks up first level JS object map keys and
-returns the corresponding value.
+returns the corresponding value. It uses the streaming JSON library
+YAJL, so it doesn't need to parse the entire string, only up until
+a match is found.
 
 Syntax:
-SELECT JSONGET('key2', '{ "key1" : "foo", "key2" : "bar" }')
+SELECT JSON_GET('key2', '{ "key1" : "foo", "key2" : "bar" }')
 
 Parameters:
-JSONGET(key [any type], json [string])
+JSON_GET(key [any type], json [string])
 
 Returns:
 A string
 
-Installation:
+Installation (on RHEL or similar):
 Requires YAJL >= 2.0: http://lloyd.github.com/yajl/
 
 make
@@ -22,8 +24,13 @@ mysql -uroot
 
 
 Example:
-> SELECT JSON_GET('key2', '{ "key1" : "foo", "key2" : "bar" }')
-bar
+mysql> SELECT JSON_GET('key2', '{ "key1" : "foo", "key2" : "bar" }')
++--------------------------------------------------------+
+| JSON_GET('key2', '{ "key1" : "foo", "key2" : "bar" }') |
++--------------------------------------------------------+
+| bar                                                    |
++--------------------------------------------------------+
+1 row in set (0.00 sec)
 
 License:
 Copyright (c) 2011 Taneli Leppä <rosmo@sektori.com>

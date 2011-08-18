@@ -274,7 +274,7 @@ char *json_get(UDF_INIT *initid, UDF_ARGS *args,
 
 /**
  * Functions arguments are:
- * jsonget(value, json)
+ * json_get(value, json)
  */
 my_bool json_get_init(UDF_INIT *initid, UDF_ARGS *args, char *message)
 {
